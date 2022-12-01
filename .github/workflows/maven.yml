@@ -37,9 +37,10 @@ jobs:
       uses: jfrog/setup-jfrog-cli@v2
       #run: jf --version
     - name: Step:5 Pushing the maven artifact to Jfrog repository
-      run: jf rt upload artifacts/cz-springboot-welcome.jar maven-demo --url=https://cloudzenix.jfrog.io/artifactory/ --user=renuka.prasad@cloudzenix.com --password=Prasad@123
-      #run: jf rt upload artifacts/cz-springboot-welcome.jar maven-demo --url=cloudzenix.jfrog.io --user=renuka.prasad@cloudzenix.com --password=Prasad@123
-  
+      run: |
+         jf rt upload artifacts/cz-springboot-welcome.jar maven-demo --url=https://cloudzenix.jfrog.io/artifactory/ --user=renuka.prasad@cloudzenix.com --password=Prasad@123
+         jf rt build-publish gitaction --buildname=$BUILD_NUMBER --url=https://cloudzenix.jfrog.io/artifactory/ --user=renuka.prasad@cloudzenix.com --password=Prasad@123
+         jf rt bs gitaction --buildname=$BUILD_NUMBER --url=https://cloudzenix.jfrog.io/artifactory/ --user=renuka.prasad@cloudzenix.com --password=Prasad@123 --fail=false
 #  docker-image-to-Jfrog:
   
 #    runs-on: self-hosted
